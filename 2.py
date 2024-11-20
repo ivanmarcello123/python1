@@ -1,40 +1,43 @@
-# Daftar buku yang tersedia di perpustakaan
-daftar_buku = [
-    "Python untuk Pemula",
-    "Algoritma dan Struktur Data",
-    "Pemrograman Web",
-    "Data Science",
-    "Kecerdasan Buatan"
-]
+# Fungsi untuk menghitung nilai akhir
+def hitung_nilai_akhir(tugas, uts, uas):
+    return (tugas * 0.2) + (uts * 0.4) + (uas * 0.4)
 
-# Menampilkan daftar buku yang tersedia
-print("Daftar Buku yang Tersedia:")
-for buku in daftar_buku:
-    print(f"- {buku}")
+# Daftar untuk menyimpan data mahasiswa
+mahasiswa = []
 
-# Menggunakan loop while untuk meminta input buku yang ingin dipinjam
-while True:
-    # Meminta pengguna untuk memasukkan judul buku yang ingin dipinjam
-    judul_buku_pinjam = input("\nMasukkan judul buku yang ingin dipinjam (atau ketik 'keluar' untuk berhenti): ")
+# Input data mahasiswa
+jumlah_mahasiswa = int(input("Masukkan jumlah mahasiswa: "))
 
-    # Jika pengguna mengetik 'keluar', keluar dari loop
-    if judul_buku_pinjam.lower() == 'keluar':
-        print("\nTerima kasih telah menggunakan layanan perpustakaan.")
-        break
+for i in range(jumlah_mahasiswa):
+    print(f"\nInput data mahasiswa ke-{i + 1}:")
+    nim = input("Masukkan NIM: ")
+    nama = input("Masukkan Nama: ")
+    tugas = float(input("Masukkan Nilai Tugas: "))
+    uts = float(input("Masukkan Nilai UTS: "))
+    uas = float(input("Masukkan Nilai UAS: "))
 
-    # Mengecek apakah buku yang dimasukkan ada dalam daftar buku
-    if judul_buku_pinjam in daftar_buku:
-        # Menghapus buku yang dipinjam dari daftar
-        daftar_buku.remove(judul_buku_pinjam)
-        print(f"\nBuku '{judul_buku_pinjam}' berhasil dipinjam!")
-        break  # Keluar dari loop setelah buku berhasil dipinjam
-    else:
-        print("\nBuku yang Anda cari tidak tersedia. Silakan coba lagi.")
+    # Menghitung nilai akhir
+    nilai_akhir = hitung_nilai_akhir(tugas, uts, uas)
 
-# Menampilkan daftar buku yang masih tersedia setelah peminjaman
-print("\nDaftar Buku yang Tersedia Setelah Peminjaman:")
-if daftar_buku:
-    for buku in daftar_buku:
-        print(f"- {buku}")
-else:
-    print("Tidak ada buku yang tersisa.")
+    # Menyimpan data mahasiswa dalam dictionary
+    data_mahasiswa = {
+        "nim": nim,
+        "nama": nama,
+        "tugas": tugas,
+        "uts": uts,
+        "uas": uas,
+        "nilai_akhir": nilai_akhir
+    }
+
+    # Menambahkan data mahasiswa ke dalam list mahasiswa
+    mahasiswa.append(data_mahasiswa)
+
+# Menampilkan hasil data mahasiswa
+print("\nData Mahasiswa:")
+for mhs in mahasiswa:
+    print(f"\nNIM: {mhs['nim']}")
+    print(f"Nama: {mhs['nama']}")
+    print(f"Nilai Tugas: {mhs['tugas']}")
+    print(f"Nilai UTS: {mhs['uts']}")
+    print(f"Nilai UAS: {mhs['uas']}")
+    print(f"Nilai Akhir: {mhs['nilai_akhir']:.2f}")
